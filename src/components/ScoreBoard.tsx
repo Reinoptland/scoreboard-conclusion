@@ -32,6 +32,15 @@ export default function Scoreboard() {
       // then sort it with the `compareByScore` callback function
       .sort(sortBy === "score" ? compareByScore : compareByName);
 
+  const incrementScore = () => {
+    console.log("YOU GET A POINT");
+    // @todo: Actually change the score of a player
+    // at the end we will call "setPlayers"
+    // this will update the state of scoreboard
+    // updating the state will make ScoreBoard and players rerender
+    // and show the new score
+  };
+
   return (
     <div className="Scoreboard">
       <h1>Scoreboard</h1>
@@ -56,6 +65,7 @@ export default function Scoreboard() {
               id={player.id}
               name={player.name}
               score={player.score}
+              incrementScore={incrementScore}
             />
           );
         })}
