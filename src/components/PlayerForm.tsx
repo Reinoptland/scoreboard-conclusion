@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type Props = {
   addPlayer: (name: string) => void;
 };
 
 export default function PlayerForm(props: Props) {
-  const initialState = localStorage.getItem("name") || "";
-  const [name, setName] = useState(initialState);
+  const [name, setName] = useState("");
 
   console.log("FORM RENDERED");
 
@@ -14,9 +13,26 @@ export default function PlayerForm(props: Props) {
 
   const handleClick = () => {
     props.addPlayer(name);
-    localStorage.removeItem("name");
     setName("");
   };
+
+  useEffect(() => {
+    const localStorageCachedName = localStorage.getItem("name");
+
+    if (!localStorageCachedName) {
+      return;
+    }
+
+    setName(localStorageCachedName);
+  }, []);
+
+  useEffect(() => {
+    if (name === "") {
+      return localStorage.removeItem("name");
+    }
+
+    localStorage.setItem("name", name);
+  }, [name]);
 
   return (
     <div className="PlayerForm">
@@ -24,7 +40,6 @@ export default function PlayerForm(props: Props) {
       <input
         value={name}
         onChange={(e) => {
-          localStorage.setItem("name", e.target.value);
           setName(e.target.value);
         }}
       />
