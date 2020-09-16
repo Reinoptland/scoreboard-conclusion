@@ -13,6 +13,10 @@ const compareByScore = (playerA: TPlayer, playerB: TPlayer) => {
   return playerB.score - playerA.score;
 };
 
+const compareByName = (playerA: TPlayer, playerB: TPlayer) => {
+  return playerA.name.localeCompare(playerB.name);
+};
+
 export default function Scoreboard() {
   const [players, setPlayers] = useState<TPlayer[]>([
     { id: 1, name: "Violeta", score: 11 },
@@ -25,7 +29,7 @@ export default function Scoreboard() {
     // first "copy" the array
     [...players]
       // then sort it with the `compareByScore` callback function
-      .sort(compareByScore);
+      .sort(compareByName);
 
   return (
     <div className="Scoreboard">
