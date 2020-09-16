@@ -4,12 +4,12 @@ type Props = {
   id: number;
   name: string;
   score: number;
-  incrementScore: () => void;
+  incrementScore: (playerId: number) => void;
 };
 
 export default function Player(props: Props) {
   const increment = () => {
-    props.incrementScore();
+    props.incrementScore(props.id);
   };
 
   return (

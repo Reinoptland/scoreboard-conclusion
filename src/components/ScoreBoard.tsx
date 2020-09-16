@@ -32,13 +32,27 @@ export default function Scoreboard() {
       // then sort it with the `compareByScore` callback function
       .sort(sortBy === "score" ? compareByScore : compareByName);
 
-  const incrementScore = () => {
-    console.log("YOU GET A POINT");
-    // @todo: Actually change the score of a player
+  // we need 1 parameter, playerId: the id of the player getting a point
+  const incrementScore = (playerId: number) => {
+    // you can check here if the playerId is getting passed in
+    console.log("YOU GET A POINT", playerId);
+
+    // make a new array of updated players using Array.map
+    const updatedPlayers = players.map((player) => {
+      // when the ids match, this player should get a point
+      if (player.id === playerId) {
+        return { ...player, score: player.score + 1 };
+      }
+
+      // if the ids don't match, don't update this player
+      return player;
+    });
+
     // at the end we will call "setPlayers"
     // this will update the state of scoreboard
     // updating the state will make ScoreBoard and players rerender
     // and show the new score
+    setPlayers(updatedPlayers);
   };
 
   return (
