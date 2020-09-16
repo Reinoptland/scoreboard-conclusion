@@ -55,6 +55,10 @@ export default function Scoreboard() {
     setPlayers(updatedPlayers);
   };
 
+  const addPlayer = (name: string) => {
+    console.log("DO WE HAVE A NAME", name);
+  };
+
   return (
     <div className="Scoreboard">
       <h1>Scoreboard</h1>
@@ -84,7 +88,7 @@ export default function Scoreboard() {
           );
         })}
       </ul>
-      <AddPlayerForm />
+      <AddPlayerForm addPlayer={addPlayer} />
     </div>
   );
 }

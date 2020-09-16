@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 
-export default function PlayerForm() {
+type Props = {
+  addPlayer: (name: string) => void;
+};
+
+export default function PlayerForm(props: Props) {
   const initialState = localStorage.getItem("name") || "";
   const [name, setName] = useState(initialState);
 
   console.log("FORM RENDERED");
 
   const feedback = name.length < 3 ? "This is too short" : null;
+
+  const handleClick = () => {
+    props.addPlayer(name);
+  };
 
   return (
     <div className="PlayerForm">
@@ -19,7 +27,7 @@ export default function PlayerForm() {
         }}
       />
       <span>{feedback}</span>
-      <button>Add player</button>
+      <button onClick={handleClick}>Add player</button>
     </div>
   );
 }
