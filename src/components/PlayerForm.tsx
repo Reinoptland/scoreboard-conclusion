@@ -14,6 +14,8 @@ export default function PlayerForm(props: Props) {
 
   const handleClick = () => {
     props.addPlayer(name);
+    localStorage.removeItem("name");
+    setName("");
   };
 
   return (

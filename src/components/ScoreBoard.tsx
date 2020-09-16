@@ -56,7 +56,16 @@ export default function Scoreboard() {
   };
 
   const addPlayer = (name: string) => {
-    console.log("DO WE HAVE A NAME", name);
+    // console.log("DO WE HAVE A NAME", name);
+    const newPlayer: TPlayer = {
+      id: Math.floor(Math.random() * 1000000),
+      name: name,
+      score: 0,
+    };
+
+    const updatedPlayers = [...players, newPlayer];
+
+    setPlayers(updatedPlayers);
   };
 
   return (
